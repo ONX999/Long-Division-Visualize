@@ -162,12 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const num = btn.dataset.num;
       if(activeInput === 'input1'){
-        // Prevent leading zeros
-        if(input1Value === '' && num === '0') return;
+        // Prevent multiple leading zeros
+        if(input1Value === '0' && num === '0') return;
+        // Replace single '0' with new digit
+        if(input1Value === '0' && num !== '0') input1Value = '';
         input1Value += num;
         input1.value = input1Value;
       } else {
-        if(input2Value === '' && num === '0') return;
+        if(input2Value === '0' && num === '0') return;
+        if(input2Value === '0' && num !== '0') input2Value = '';
         input2Value += num;
         input2.value = input2Value;
       }
