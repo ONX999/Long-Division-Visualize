@@ -1,37 +1,333 @@
 :root{
-  --bg:#f7fafc;
+  --bg:#f0f4f8;
   --card:#ffffff;
-  --muted:#444;
-  --accent:#0b74ff;
+  --text:#1a202c;
+  --muted:#718096;
+  --accent:#4299e1;
+  --accent-hover:#3182ce;
+  --success:#48bb78;
+  --danger:#f56565;
+  --border:#e2e8f0;
+  --shadow:0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg:0 10px 25px rgba(0,0,0,0.1);
 }
-*{box-sizing:border-box}
-html,body{height:100%}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  height:100%;
+  width:100%;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
 body{
-  margin:0;
-  font-family: system-ui, "Noto Sans TC", "PingFang TC", sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC",sans-serif;
   background:var(--bg);
-  color:var(--muted);
+  color:var(--text);
   display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  padding:28px;
+  flex-direction:column;
+  padding:0;
+  margin:0;
+  /* iOS safe area support */
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
 }
+
 main{
-  width:920px;
-  max-width:96%;
+  width:100%;
+  max-width:480px;
+  margin:0 auto;
   background:var(--card);
-  padding:20px;
-  border-radius:8px;
-  box-shadow:0 6px 24px rgba(0,0,0,0.08);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  box-shadow:var(--shadow-lg);
 }
-h1{margin:0 0 12px 0;font-size:20px}
-form{display:flex;gap:12px;align-items:center;margin:12px 0}
-label{display:flex;flex-direction:column;font-size:14px}
-input{padding:8px;border:1px solid #d1d5db;border-radius:6px;width:140px}
-button{padding:8px 12px;border-radius:6px;border:0;background:var(--accent);color:#fff;cursor:pointer}
-button#clearBtn{background:#6b7280}
-.box{background:#f3f4f6;padding:12px;border-radius:6px;overflow:auto}
-pre{font-family: "Courier New", monospace; white-space:pre}
-ol{padding-left:20px}
-#summary{margin-bottom:8px}
-footer{margin-top:12px;font-size:12px;color:#6b7280}
+
+h1{
+  font-size:24px;
+  font-weight:700;
+  padding:20px 20px 16px;
+  text-align:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent-hover));
+  color:white;
+  margin:0;
+}
+
+/* Operation Selector */
+.operation-selector{
+  display:flex;
+  gap:8px;
+  padding:16px 20px;
+  background:white;
+  border-bottom:1px solid var(--border);
+}
+
+.op-btn{
+  flex:1;
+  padding:12px;
+  border:2px solid var(--border);
+  border-radius:8px;
+  background:white;
+  color:var(--muted);
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.2s;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.op-btn.active{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
+}
+
+.op-btn:active{
+  transform:scale(0.98);
+}
+
+/* Calculator Module */
+.calculator-module{
+  padding:16px 20px;
+  background:white;
+}
+
+.display-area{
+  margin-bottom:16px;
+}
+
+.input-labels{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:8px;
+  padding:0 4px;
+}
+
+.input-displays{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--bg);
+  padding:12px;
+  border-radius:12px;
+  border:2px solid var(--border);
+}
+
+.input-displays input{
+  flex:1;
+  border:none;
+  background:white;
+  padding:12px;
+  font-size:24px;
+  font-weight:600;
+  text-align:right;
+  border-radius:8px;
+  color:var(--text);
+  outline:none;
+}
+
+.input-displays input:focus{
+  background:#f0f9ff;
+  box-shadow:0 0 0 3px rgba(66,153,225,0.1);
+}
+
+.operator{
+  font-size:28px;
+  font-weight:700;
+  color:var(--accent);
+  min-width:24px;
+  text-align:center;
+}
+
+/* Calculator Pad */
+.calculator-pad{
+  display:flex;
+  gap:12px;
+}
+
+.number-pad{
+  flex:3;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.control-pad{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.num-btn,.action-btn{
+  border:none;
+  border-radius:12px;
+  font-size:20px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.15s;
+  -webkit-tap-highlight-color:transparent;
+  min-height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.num-btn{
+  background:white;
+  color:var(--text);
+  border:2px solid var(--border);
+}
+
+.num-btn:active{
+  background:var(--bg);
+  transform:scale(0.95);
+}
+
+.num-btn.zero{
+  grid-column:span 2;
+}
+
+.action-btn{
+  background:var(--accent);
+  color:white;
+  font-size:18px;
+}
+
+.action-btn:active{
+  background:var(--accent-hover);
+  transform:scale(0.95);
+}
+
+.clear-btn{
+  background:var(--danger);
+}
+
+.clear-btn:active{
+  background:#e53e3e;
+}
+
+.calc-btn{
+  background:var(--success);
+  flex:1;
+}
+
+.calc-btn:active{
+  background:#38a169;
+}
+
+.del-btn{
+  background:var(--muted);
+}
+
+.del-btn:active{
+  background:#4a5568;
+}
+
+.switch-btn{
+  background:#805ad5;
+}
+
+.switch-btn:active{
+  background:#6b46c1;
+}
+
+/* Results Section */
+.result-panel{
+  padding:20px;
+  background:white;
+  border-top:1px solid var(--border);
+  flex:1;
+}
+
+.result-panel h2{
+  font-size:20px;
+  margin-bottom:12px;
+  color:var(--text);
+}
+
+.summary{
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  color:white;
+  padding:16px;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:16px;
+  text-align:center;
+}
+
+details{
+  margin-bottom:16px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+summary{
+  padding:12px 16px;
+  background:var(--bg);
+  cursor:pointer;
+  font-weight:600;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+summary:active{
+  background:#e2e8f0;
+}
+
+.box{
+  padding:16px;
+  font-size:14px;
+  line-height:1.6;
+  overflow-x:auto;
+  margin:0;
+}
+
+pre.box{
+  font-family:"SF Mono","Monaco","Courier New",monospace;
+  white-space:pre;
+  background:white;
+}
+
+ol.box{
+  padding-left:36px;
+  background:white;
+}
+
+ol.box li{
+  margin-bottom:8px;
+  color:var(--muted);
+}
+
+footer{
+  padding:16px 20px;
+  text-align:center;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+}
+
+footer small{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* iOS specific adjustments */
+@supports(padding:max(0px)){
+  body{
+    padding-left:max(0px,env(safe-area-inset-left));
+    padding-right:max(0px,env(safe-area-inset-right));
+  }
+}
+
+/* Prevent zoom on input focus (iOS) */
+@media screen and (max-width:480px){
+  input,select,textarea{
+    font-size:16px;
+  }
+}
