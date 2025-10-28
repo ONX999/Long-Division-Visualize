@@ -1,0 +1,37 @@
+:root{
+  --bg:#f7fafc;
+  --card:#ffffff;
+  --muted:#444;
+  --accent:#0b74ff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, "Noto Sans TC", "PingFang TC", sans-serif;
+  background:var(--bg);
+  color:var(--muted);
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:28px;
+}
+main{
+  width:920px;
+  max-width:96%;
+  background:var(--card);
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 6px 24px rgba(0,0,0,0.08);
+}
+h1{margin:0 0 12px 0;font-size:20px}
+form{display:flex;gap:12px;align-items:center;margin:12px 0}
+label{display:flex;flex-direction:column;font-size:14px}
+input{padding:8px;border:1px solid #d1d5db;border-radius:6px;width:140px}
+button{padding:8px 12px;border-radius:6px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+button#clearBtn{background:#6b7280}
+.box{background:#f3f4f6;padding:12px;border-radius:6px;overflow:auto}
+pre{font-family: "Courier New", monospace; white-space:pre}
+ol{padding-left:20px}
+#summary{margin-bottom:8px}
+footer{margin-top:12px;font-size:12px;color:#6b7280}

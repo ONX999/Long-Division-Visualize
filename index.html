@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>直式除法顯示器</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main>
+    <h1>直式除法（Long Division）顯示器</h1>
+    <form id="calcForm" onsubmit="return false;">
+      <label>被除數（Dividend）
+        <input id="dividend" inputmode="numeric" pattern="[0-9]*" value="60" />
+      </label>
+      <label>除數（Divisor）
+        <input id="divisor" inputmode="numeric" pattern="[0-9]*" value="30" />
+      </label>
+      <button id="calcBtn" type="button">計算並顯示步驟</button>
+      <button id="clearBtn" type="button">清除</button>
+    </form>
+    <section id="resultPanel" hidden>
+      <h2>運算結果</h2>
+      <div id="summary"></div>
+      <h3>直式除法圖（等寬字體）</h3>
+      <pre id="asciiDivision" class="box"></pre>
+      <h3>逐步過程（Step-by-step）</h3>
+      <ol id="steps" class="box"></ol>
+    </section>
+    <footer>
+      <small>限制：僅支援非負整數。若需小數或負數支援，請在 repo 中擴充。</small>
+    </footer>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>
