@@ -2,35 +2,76 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>直式除法顯示器</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>直式計算器</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main>
-    <h1>直式除法（Long Division）顯示器</h1>
-    <form id="calcForm" onsubmit="return false;">
-      <label>被除數（Dividend）
-        <input id="dividend" inputmode="numeric" pattern="[0-9]*" value="60" />
-      </label>
-      <label>除數（Divisor）
-        <input id="divisor" inputmode="numeric" pattern="[0-9]*" value="30" />
-      </label>
-      <button id="calcBtn" type="button">計算並顯示步驟</button>
-      <button id="clearBtn" type="button">清除</button>
-    </form>
-    <section id="resultPanel" hidden>
+    <h1>直式計算器</h1>
+    
+    <!-- Operation Type Selection -->
+    <div class="operation-selector">
+      <button id="divisionBtn" class="op-btn active" type="button">除法 ÷</button>
+      <button id="multiplicationBtn" class="op-btn" type="button">乘法 ×</button>
+    </div>
+
+    <!-- Calculator Input Module -->
+    <div class="calculator-module">
+      <div class="display-area">
+        <div class="input-labels">
+          <span id="label1">被除數</span>
+          <span id="label2">除數</span>
+        </div>
+        <div class="input-displays">
+          <input id="input1" type="text" readonly value="" placeholder="0" />
+          <span class="operator" id="operatorSymbol">÷</span>
+          <input id="input2" type="text" readonly value="" placeholder="0" />
+        </div>
+      </div>
+      
+      <div class="calculator-pad">
+        <div class="number-pad">
+          <button class="num-btn" data-num="7">7</button>
+          <button class="num-btn" data-num="8">8</button>
+          <button class="num-btn" data-num="9">9</button>
+          <button class="num-btn" data-num="4">4</button>
+          <button class="num-btn" data-num="5">5</button>
+          <button class="num-btn" data-num="6">6</button>
+          <button class="num-btn" data-num="1">1</button>
+          <button class="num-btn" data-num="2">2</button>
+          <button class="num-btn" data-num="3">3</button>
+          <button class="num-btn zero" data-num="0">0</button>
+          <button class="action-btn del-btn" id="deleteBtn">⌫</button>
+        </div>
+        <div class="control-pad">
+          <button class="action-btn switch-btn" id="switchInput">⇅</button>
+          <button class="action-btn clear-btn" id="clearBtn">C</button>
+          <button class="action-btn calc-btn" id="calcBtn">=</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <section id="resultPanel" class="result-panel" hidden>
       <h2>運算結果</h2>
-      <div id="summary"></div>
-      <h3>直式除法圖（等寬字體）</h3>
-      <pre id="asciiDivision" class="box"></pre>
-      <h3>逐步過程（Step-by-step）</h3>
-      <ol id="steps" class="box"></ol>
+      <div id="summary" class="summary"></div>
+      <details open>
+        <summary>直式計算圖</summary>
+        <pre id="asciiDivision" class="box"></pre>
+      </details>
+      <details>
+        <summary>逐步過程</summary>
+        <ol id="steps" class="box"></ol>
+      </details>
     </section>
+
     <footer>
-      <small>限制：僅支援非負整數。若需小數或負數支援，請在 repo 中擴充。</small>
+      <small>支援非負整數的除法與乘法運算</small>
     </footer>
   </main>
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
